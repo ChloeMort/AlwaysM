@@ -1,0 +1,312 @@
+version: '2.0'
+config:
+  store_entities_as_slots: true
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- affirm:
+    use_entities: true
+- bye:
+    use_entities: true
+- chitchat:
+    use_entities: true
+- deny:
+    use_entities: true
+- enter_data:
+    use_entities: true
+- explain:
+    use_entities: true
+- faq:
+    use_entities: true
+- feedback:
+    use_entities: true
+- greet:
+    use_entities: true
+- need_help_broad:
+    use_entities: true
+- next_step:
+    use_entities: true
+- out_of_scope:
+    use_entities: true
+- react_negative:
+    use_entities: true
+- react_positive:
+    use_entities: true
+- restart:
+    use_entities: true
+- suggestion:
+    use_entities: true
+- switch:
+    use_entities: true
+- thank:
+    use_entities: true
+- trigger_response_selector:
+    use_entities: true
+- contact_sales:
+    use_entities: true
+- signup_newsletter:
+    use_entities: true
+- why_rasa:
+    use_entities: true
+- technical_question:
+    use_entities: true
+
+
+entities:
+- generation
+- pay_method
+- shop_city
+- shop_address
+- shop_name
+- shop_available_time
+- user_name
+- user_location
+- user_email
+- phone_num
+- user_id
+- feedback_value
+- retrieval_intent
+- product
+- name
+- location
+- language
+- plan
+- email
+- current_api
+
+slots:
+  generation:
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+    values:
+    - 3g
+    - 4g
+    - 5g
+  pay_method:
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+    values:
+    - prepaid
+    - postpaid
+  shop_name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  shop_city:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  shop_address:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  email:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  feedback_message:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  feedback_value:
+    type: rasa.shared.core.slots.CategoricalSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+    values:
+    - positive
+    - negative
+  problem_description:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  faq:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+  shown_privacy:
+    type: rasa.shared.core.slots.AnySlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
+
+responses:
+  utter_ask_problem_description:
+  - text: Can you describe the problem you're having?
+  utter_ask_help:
+  - buttons:
+    - payload: /affirm
+      title: 👍
+    - payload: /deny
+      title: 👎
+    text: Did that help?
+  utter_ask_email:
+  - text: What's your email address?
+  utter_ask_feedback:
+  - buttons:
+    - payload: '/feedback{{"feedback_value": "positive"}}'
+      title: 👍
+    - payload: '/feedback{{"feedback_value": "negative"}}'
+      title: 👎
+    text: Does the chat do any help?
+  utter_ask_feedback_message:
+  - text: I'm sorry I couldn't help you. Please let me know if you have any suggestions for how I can improve.
+  utter_bye:
+  - text: Goodbye!
+  - text: Bye!
+  - text: Ciao!
+  - text: Bye, was nice talking to you!
+  - text: Bye bye!
+  utter_confirm_salesrequest:
+  - text: Thanks a bunch, we'll be in touch soon! ✉️
+  utter_confirmationemail:
+  - text: We sent a confirmation email to {email}.、
+  utter_contact_email:
+  - text: You can email us at hi@rasa.com.
+  utter_default:
+  - text: Sorry, I didn't get that 🤷. Could you please rephrase?
+  - text: I didn't understand, could you rephrase that?
+  - text: I'm sorry, but I didn't understand you. Could you please rephrase what you just said?
+  - text: I'm afraid I didn't get what you just said. Could you rephrase that?
+  - text: I didn't quite get that, could you rephrase your message?
+  - text: Could you rephrase your message? I didn't get it, I'm sorry.
+  utter_direct_to_forum_for_help:
+  - text: I've made a note of the problem you're experiencing. In the meantime, if you're still stuck, please ask for help on our [website](https://example.example.com/).
+  utter_explain_plan:
+  - text: |-
+      3G – Available only as prepaid connection. The plan selection is quite limited
+      4G – the most successful product, so far, as it offers both prepaid and postpaid connections, for both individual and corporate (bulk) customers. This category has plans for pretty much every class of customers
+      5G – anticipated to be the next most successful product. However, due to limited infrastructure across the nation it currently operates in, the plans it offers are rather limited, but more than what it offers under 3G. Both prepaid and postpaid connections are offered. However, the plans are priced higher than in the other two categories.
+  utter_explain_shop:
+  - text: I will shoe you the surrounding shops, and the time they are available.
+  utter_greet_name:
+  - text: Hi, {name}!
+  - text: Hello, {name}!
+  - text: Hey, {name}!
+  utter_greet_noname:
+  - text: Hey!
+  - text: Hi!
+  - text: Hey there!
+  utter_inform_privacy_policy:
+  - text: By chatting to me you agree to our [privacy policy](http://test.test).
+  utter_no_email:
+  - text: Hmm, I'm not sure that's a valid email, please make sure to include the full address 😅
+  utter_no_speak:
+  - text: I'm afraid we can't chat then 😢
+  utter_nohelp:
+  - text: For now that's all I can do, so feel free to try it out. If you have any suggestions for what I should learn, let me know!
+  utter_not_sure:
+  - text: Hmm, not sure what you mean...
+  utter_noworries:
+  - text: No worries!
+  - text: You're welcome!
+  - text: I'm happy to help.
+  utter_possibilities:
+  - text: |
+      You can ask me about:
+      - the available connection plans
+      - your own plan or registering the loss of SIM card
+      - manual help
+  utter_react_negative:
+  - text: 😕
+  - text: 😞
+  - text: 😥
+  - text: 😢
+  utter_react_positive:
+  - text: 😄
+  - text: 😊
+  - text: 👏
+  - text: 😍
+  utter_response_why_email:
+  - text: I need your email to send codes for examining.
+  - text: I need it so that I can sign you up.
+  utter_restart:
+  - text: Loading... And I've been restarted! 🤯
+  - text: Congrats you've restarted me! 😉
+  utter_restart_with_button:
+  - buttons:
+    - payload: /restart
+      title: Restart
+    text: Click the button below if you want to start over.
+  utter_suggestion:
+  - text: I don't have a skill to help you with this stage yet, but please ask any questions you have so I can learn them in the future!
+  utter_thank_suggestion:
+  - text: Thanks for your input!
+  utter_thumbsup:
+  - text: 👍
+  - text: Okay.
+  - text: Got it.
+  utter_what_help:
+  - text: Ok, what can I help you with?
+  utter_ask_more_details:
+  - text: Could you be more specific?
+  - text: Can you tell me more?
+  utter_explan_3G:
+  - text: Available only as prepaid connection. The plan selection is quite limited.
+  utter_explain_4G:
+  - text: The most successful product, so far, as it offers both prepaid and postpaid connections, for both individual and corporate (bulk) customers. This category has plans for pretty much every class of customers.
+  utter_explain_5G:
+  - text: Anticipated to be the next most successful product. However, due to limited infrastructure across the nation it currently operates in, the plans it offers are rather limited, but more than what it offers under 3G. Both prepaid and postpaid connections are offered. However, the plans are priced higher than in the other two categories.
+  utter_anything_else:
+  - text: Is there anything else I can help you with?
+
+
+actions:
+- action_greet_user
+- action_tag_feedback
+- sales_form
+- action_submit_sales_form
+- action_submit_subscribe_newsletter_form
+- subscribe_newsletter_form
+- action_docs_search
+- action_set_faq_slot
+- action_explain_faq
+- action_pause
+- validate_sim_form
+
+
+forms:
+  suggestion_form:
+    suggestion:
+    - type: from_text
+  sim_form:
+    phone_num:
+    - entity: phone_num
+      type: from_entity
+    - intent: enter_data
+      type: from_text
+    user_id:
+    - entity: user_id
+      type: from_entity
+    - intent: enter_data
+      type: from_text
+  connect_plan_form:
+    generation:
+    - entity: generation
+      type: from_entity
+    - intent: enter_data
+      type: from_text
+    pay_method:
+    - entity: pay_method
+      type: from_entity
+    - intent: enter_data
+      type: from_text
+  shop_form:
+    shop_city:
+    - entity: shop_city
+      type: from_entity
+    - intent: enter_data
+      type: from_text
+e2e_actions: []

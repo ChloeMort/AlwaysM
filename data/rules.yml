@@ -1,0 +1,23 @@
+version: "2.0"
+rules:
+- rule: explain 3G
+  steps:
+  - intent: explain
+    entities:
+    - plan: 3G
+  - action: utter_explain_3G
+  wait_for_user_input: false
+- rule: explain 4G
+  steps:
+  - intent: explain
+    entities:
+    - plan: 4G
+  - action: utter_explain_4G
+  wait_for_user_input: false
+- rule: explain 5G
+  steps:
+  - intent: explain
+    entities:
+    - plan: 5G
+  - action: utter_explain_5G
+  wait_for_user_input: false
