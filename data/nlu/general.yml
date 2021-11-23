@@ -1,0 +1,383 @@
+version: "2.0"
+nlu:
+- intent: broken
+  examples: |
+    - it's not working
+    - I think it's broken
+    - help me can you fix it
+    - it's broken
+    - it's not training
+    - help me please it's not working
+    - it won't train
+    - the bot won't train
+- intent: enter_data
+  examples: |
+    - my location is [Nanjing](user_location)
+    - I am in [Nanjing](user_location)
+    - I am in [Oulu](user_location)
+    - I am now in [Oulu](user_location)
+    - my id is [1234567890](user_id)
+    - id is 
+    - $1
+    - 1 euro
+    - 10000 dollars
+    - 10000000
+    - 100000k
+    - 10000k
+    - 100k
+    - 150,000 USD
+    - 150,000$/ year
+    - 2 euro
+    - 20k
+    - 240k/year
+    - 400 trilion
+    - 5 bucks
+    - 5 euros
+    - 5 mln
+    - 50,000 dollar
+    - 50,000,000 INR
+    - 50k
+    - 60 million INR
+    - 75000-150000 euro
+    - Country names
+    - I am [Christina Sullivan](user_name)
+    - I am [Hattie Rice](user_name)
+    - I am [Robert Starks](user_name)
+    - I'm [Gladys Bynum](user_name)
+    - I'm [Harvey Cordano](user_name)
+    - I'm [Jeanine Hwang](user_name)
+    - I'm [Virginia Mason](user_name)
+    - It is asdas@dvsccavsdfrthy.com
+    - My email is Bill@D.com
+    - My name is [Ashleigh Mees](user_name)
+    - My name is [chelsea Parker](user_name)
+    - My name is [jessie maglione](user_name)
+    - My name is [Kenneth Sherman](user_name)
+    - My name is [Lee George](user_name)
+    - My name is [Louise Caudill](user_name)
+    - My name is [Richard smith](user_name)
+    - My name is [Shane Goodyear](user_name)
+    - My name is [Sondra Boyd](user_name)
+    - My name si [tom Harbin](user_name)
+    - None
+    - This is [Kim Vanderveen](user_name)
+    - This is [Norma Taylor](user_name)
+    - $0.00
+    - $1000
+    - 0
+    - 456478346416464688331
+    - 1000000
+    - 100000
+    - 1000
+    - 100
+    - 10
+    - 10k
+    - 120000
+    - 1231
+    - 12
+    - 2 million
+    - 200000000
+    - 20000
+    - 20000k
+    - 2000k
+    - 200k
+    - 25,000
+    - 300000
+    - 300k
+    - 3
+    - 500 million
+    - 500000
+    - 5000
+    - 500k
+    - 6000000
+    - 900 dollars
+    - 90k
+    - 99
+    - Carolyn.Eisenhauer@Watkins.com
+    - [David Carter](user_name)
+    - Ebony@gmail.com
+    - [Elise](user_name)
+    - [Im Phyllis Howard](user_name)
+    - J_Herrera@gmail.com
+    - [Jamie Moore](user_name)
+    - [Jane Baines](user_name)
+    - [John Strickland](user_name)
+    - K_Claytor@yahoo.com
+    - K_Rainey@Yochum.net
+    - [Keith Donnell](user_name) PhD
+    - Kristin@yahoo.com
+    - [Linda Mchone](user_name)
+    - [Michele Perry](user_name)
+    - [Michelle Garcia](user_name)
+    - [Michelle Vinion](user_name)
+    - [Mr. Sweney](user_name)
+    - None?
+    - Ten
+    - [Terri Cline](user_name)
+    - [William Zelkind](user_name)
+    - Willie@gmail.com
+    - a@b.com
+    - abhbose3k@gmail.com
+    - none
+    - one billion
+    - one
+    - about 10 k
+    - around $500,000 per year
+    - around 200k
+    - around ten euros
+    - between 100 to 200.000
+    - bout 400 INR
+    - can you try E_Conder@gmail.com instead?
+    - don't have one
+    - eisenkleber limited co kg
+    - email = Patti.Salazar@gmail.com
+    - faq
+    - got it
+    - have no idea
+    - i don't have one
+    - i don't have it
+    - i don't know
+    - i have none
+    - i have about 200 bucks in my savings account
+    - i need a bot for customer service automation
+    - i sell turtles
+    - i use anaconda
+    - i wanna build all the bots
+    - i want a great bot to impress my boss
+    - i want to build a bot
+    - i want to build a bot about me
+    - i want to build a health bot
+    - i want to build all the bots
+    - i want to build an insurance bot
+    - i want to build bots
+    - i want to built a [Eric Jones](user_name) bot
+    - it's 500000000
+    - it's [Katie Betz](user_name)
+    - it's R_Iuliucci@yahoo.com
+    - it's [Robert Weir](user_name)
+    - it's Shannon.Adelman@Hurt.com
+    - lead generation
+    - like 60 quid
+    - mail: Geneva.Favors@yahoo.com
+    - maybe then instead James@Anast.com
+    - mi name is [Kathy Wright](user_name)
+    - my business mail is s_Dibenedetto@Simpson.net
+    - my email is Carole@Hart.com
+    - my email is Elinor_Stock@Higgenbotham.com
+    - my email is K_Spivey@yahoo.com
+    - my email is Kelly@Coulter.net
+    - my email is M_Jones@Luna.com
+    - my email is Mia_Gainey@gmail.com
+    - my email is S_Calderon@Cofield.com
+    - my email is Virginia@Brown.com
+    - my emayl is V_Comley@Nelson.com
+    - my name is [Alexander Kohn](user_name)
+    - my name is [betty mclendon](user_name)
+    - my name is [Brian Leung](user_name)
+    - my name is [Claude Ake](user_name)
+    - my name is [Earl Ring](user_name)
+    - my name is [Felicia Cosby](user_name)
+    - my name is [Frances Kunkle](user_name)
+    - my name is [Greg King](user_name)
+    - my name is [james culpit](user_name)
+    - my name is [Jermaine Mccleery](user_name)
+    - my name is [John Evers](user_name)
+    - my name is [Joseph Parson](user_name)
+    - my name is [Monica Ser](user_name)
+    - my name is [Nigel Partida](user_name)
+    - my name is [Staci Simpson](user_name)
+    - my name is [susan crandall](user_name)
+    - my name is [Tabitha Schoenthal](user_name)
+    - my name's [Michael Peppers](user_name)
+    - my own
+    - n/a
+    - no idea
+    - not sure yet
+    - nothing
+    - ok it's Hee@yahoo.com
+    - ok its P_Simpkins@Suehs.com
+    - on that will get me promoted
+    - one bot
+    - one trillion dollar
+    - oov
+    - oov per year
+    - operations
+    - our estimation is 10k
+    - picking my nose
+    - pip
+    - pip is fine
+    - pip please
+    - please conda
+    - problem solving
+    - My name is [manuel](user_name)
+    - I am [Aniket](user_name)
+    - Sorry  it's not [suleman](user_name) is [Shehzad](user_name)
+- intent: human_handoff
+  examples: |
+    - Can I speak to anyone who can really help me?
+    - Could I talk to [Asgod King](user_name)?
+    - I don't wanna talk to a bot
+    - I dont like to talk to a machine
+    - I want to talk to a human
+    - can I speak to a person?
+    - can i please speak to a human?
+    - can you forward me to your team
+    - can you put me in touch with a human?
+    - do you have human support ?
+    - gimme a proper human
+    - give me a human
+    - give me a human now
+    - human handoff
+    - i dont wanna talk to a bot
+    - i want to speak to a [manager](job_function)
+    - i want to speak to a real person
+    - i want to speak to customer service
+    - i want to talk to a human
+    - i want to talk to a person
+    - i want to talk to human
+    - i want to talk to someone else
+    - i want to talk to someone who is smarter than you
+    - i would like to speak to a person
+    - let me speak with a real person please
+    - let me talk to a human
+    - let me talk to a real person
+    - please give me a human
+    - service agent
+    - someone from customer care
+    - speak to a real person
+    - talking to a bot is stupid
+    - that's annoying I'd like to speak to someone real
+    - thats not helping, can i talk to human?
+    - wrong i want to speak to a human
+    - can i speak to human
+    - can i speak to your human
+    - i want to chat with human
+    - How do I talk to a human
+    - talk with a human
+    - Can i talk to a human instead
+    - nevermind.... you're not human ... I need to talk to a live person
+    - Can you get a human to assist me?
+    - Can i talk to a human?
+    - Can I talk to a human
+    - Can I speak to a human?
+    - can i speak to a human
+    - no, i want to talk to human
+    - can you hand a conversation over to a human?
+    - can I talk to human?
+    - can I talk to human
+    - talk to human
+    - i want human :(
+    - can i talk to human
+    - i want to talk to a human \
+    - i want to speak to human
+    - can i talk to a real person?
+    - connect me to a real person
+    - I need a real person
+    - can i took with a real person
+    - let me speak to a real person
+    - let me speak to a real person please
+    - i want to talk to a real person
+- intent: restart
+  examples: |
+    - yep you can restart
+    - Please restart this chat/
+    - ok restart please
+    - please restart the bot
+    - restart this conversation
+    - i want to restart
+    - why don't you restart????
+    - hey, i said restart
+    - restart session pls
+    - restart ps
+- synonym: english
+  examples: |
+    - English
+    - en
+    - eng
+    - Eng
+    - ENGLISH
+- synonym: USA
+  examples: |
+    - US
+    - United States
+    - U.S.
+    - usa
+- synonym: United Kingdom
+  examples: |
+    - UK
+    - U.K.
+- synonym: all
+  examples: |
+    - both
+- synonym: date
+  examples: |
+    - dates
+- synonym: distance
+  examples: |
+    - distances
+- synonym: money
+  examples: |
+    - amounts
+- synonym: name
+  examples: |
+    - names
+- synonym: organisation
+  examples: |
+    - companies
+- synonym: prepaid
+  examples: |
+    - pay before use
+    - pay in advance
+    - pay ahead
+- synonym: postpaid
+  examples: |
+    - pay after use
+    - pay after
+- synonym: 5G
+  examples: |
+    - 5g
+    - 5th-generation
+    - fifth generation
+    - the fifth generation
+    - the 5rd generation
+    - 5g network
+    - 5th-generation network
+    - fifth generation network
+    - the fifth generation network
+    - the 5rd generation network
+- synonym: 4G
+  examples: |
+    - 4g
+    - 4th-generation
+    - fourth generation
+    - the fourth generation
+    - the 4rd generation
+    - 4g network
+    - 4th-generation network
+    - fourth generation network
+    - the fourth generation network
+    - the 4rd generation network
+- synonym: 3G
+  examples: |
+    - 3g
+    - 3rd-generation
+    - Third generation
+    - the third generation
+    - the 3rd generation
+    - 3g network
+    - 3rd-generation network
+    - Third generation network
+    - the third generation network
+    - the 3rd generation network
+- synonym: local
+  examples: |
+    - locally
+    - my computer
+    - my machine
+    - my laptop
+- regex: greet
+  examples: |
+    - hey[^\s]*
+- regex: zipcode
+  examples: |
+    - [0-9]{5}

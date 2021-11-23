@@ -29,21 +29,27 @@ import logging
 import json
 from datetime import datetime
 from typing import Any, Dict, List, Text, Optional
-
+import sqlalchemy as sa
 from rasa_sdk import Action, Tracker
 from rasa_sdk.types import DomainDict
 from rasa_sdk.forms import FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import (
     SlotSet,
-    UserUtteranceReverted,
-    ConversationPaused,
     EventType,
+    ActionExecuted,
+    SessionStarted,
+    Restarted,
+    FollowupAction,
+    UserUtteranceReverted,
 )
+from actions.profile_db import User, create_database, ProfileDB
+
+logger = logging.getLogger(__name__)
 
 
 class ActionPause(Action):
-    """Pause the conversation"""
+    """Pause the conversation."""
 
     def name(self) -> Text:
         return "action_pause"
@@ -58,7 +64,7 @@ class ActionPause(Action):
     
 
 class ActionGreetUser(Action):
-    """Greets the user with/without privacy policy"""
+    """Greets the user with/without privacy policy."""
 
     def name(self) -> Text:
         return "action_greet_user"
@@ -84,3 +90,38 @@ class ActionGreetUser(Action):
                 dispatcher.utter_message(response="utter_inform_privacy_policy")
                 return [SlotSet("shown_privacy", True)]
         return []
+
+class ActionRestartWithButton(Action):
+    def name(self) -> Text:
+        return "action_restart_with_button"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> None:
+
+        dispatcher.utter_message(template="utter_restart_with_button")
+
+
+user_obj = User(name="tester", mail="tester@test.com", id_num="123456")
+
+
+class ValidateUserForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_user_form"
+
+    def validate_email(
+        self,
+        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+
+        if MailChimpAPI.is_valid_email(value):
+            return {"email": value}
+        else:
+            dispatcher.utter_message(template="utter_no_email")
+            return {"email": None}

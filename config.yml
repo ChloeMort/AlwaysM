@@ -16,13 +16,6 @@ pipeline:
   epochs: 200
   ranking_length: 5
 
-- name: DucklingEntityExtractor
-  url: http://localhost:8000
-  dimensions:
-  - user_email
-  - number
-  - amount-of-money
-
 - name: EntitySynonymMapper
 - name: ResponseSelector
   retrieval_intent: out_of_scope

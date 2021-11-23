@@ -9,23 +9,17 @@ intents:
     use_entities: true
 - bye:
     use_entities: true
-- chitchat:
-    use_entities: true
 - deny:
     use_entities: true
 - enter_data:
     use_entities: true
 - explain:
     use_entities: true
-- faq:
-    use_entities: true
 - feedback:
     use_entities: true
 - greet:
     use_entities: true
 - need_help_broad:
-    use_entities: true
-- next_step:
     use_entities: true
 - out_of_scope:
     use_entities: true
@@ -35,24 +29,24 @@ intents:
     use_entities: true
 - restart:
     use_entities: true
-- suggestion:
-    use_entities: true
-- switch:
-    use_entities: true
 - thank:
     use_entities: true
-- trigger_response_selector:
+- sim_lost:
     use_entities: true
-- contact_sales:
+- query_plan:
     use_entities: true
-- signup_newsletter:
+- query_shop:
     use_entities: true
-- why_rasa:
+- query_sim_state:
     use_entities: true
-- technical_question:
+- grievance:
     use_entities: true
-
-
+- human_handoff:
+    use_entities: true
+- broken:
+    use_entities: true
+- goodbye:
+    use_entities: true
 entities:
 - generation
 - pay_method
@@ -65,16 +59,11 @@ entities:
 - user_email
 - phone_num
 - user_id
-- feedback_value
-- retrieval_intent
-- product
-- name
-- location
-- language
 - plan
-- email
-- current_api
-
+- name
+- job_function
+- language
+- company
 slots:
   generation:
     type: rasa.shared.core.slots.CategoricalSlot
@@ -141,8 +130,14 @@ slots:
     initial_value: null
     auto_fill: true
     influence_conversation: false
-
 responses:
+  utter_help:
+  - text: |-
+      I can help you with your mobile relative issues. 
+      You can ask me things like: 
+      - What's my mobile connect plan? 
+      - Check my SIM card status. 
+      - What should I do if my SIM card lost?
   utter_ask_problem_description:
   - text: Can you describe the problem you're having?
   utter_ask_help:
@@ -172,9 +167,9 @@ responses:
   utter_confirm_salesrequest:
   - text: Thanks a bunch, we'll be in touch soon! ✉️
   utter_confirmationemail:
-  - text: We sent a confirmation email to {email}.、
+  - text: We sent a confirmation email to {email}.
   utter_contact_email:
-  - text: You can email us at hi@rasa.com.
+  - text: You can email us at ysha18@student.oulu.fi
   utter_default:
   - text: Sorry, I didn't get that 🤷. Could you please rephrase?
   - text: I didn't understand, could you rephrase that?
@@ -261,22 +256,20 @@ responses:
   - text: Anticipated to be the next most successful product. However, due to limited infrastructure across the nation it currently operates in, the plans it offers are rather limited, but more than what it offers under 3G. Both prepaid and postpaid connections are offered. However, the plans are priced higher than in the other two categories.
   utter_anything_else:
   - text: Is there anything else I can help you with?
-
-
+  utter_answer_shop:
+  - text: There are 1 shop in NJIT
+  - text: There is a shop available in OU.
+  utter_answer_plan:
+  - text: 3G, 4G, 5G.
+  utter_response_sim_due:
+  - text: Your SIM card is due.
+  utter_sim_ no_due:
+  - text: Your SIM card is not due.
 actions:
 - action_greet_user
-- action_tag_feedback
-- sales_form
-- action_submit_sales_form
-- action_submit_subscribe_newsletter_form
-- subscribe_newsletter_form
-- action_docs_search
-- action_set_faq_slot
-- action_explain_faq
 - action_pause
-- validate_sim_form
 
-
+- action_restart_with_button
 forms:
   suggestion_form:
     suggestion:
