@@ -47,6 +47,12 @@ intents:
     use_entities: true
 - goodbye:
     use_entities: true
+- check_sim:
+    use_entities: true
+- query_user:
+    use_entities: true
+- check_sime:
+    use_entities: true
 entities:
 - generation
 - pay_method
@@ -57,7 +63,7 @@ entities:
 - user_email
 - phone_num
 - user_id
-
+- name
 slots:
   generation:
     type: rasa.shared.core.slots.CategoricalSlot
@@ -116,7 +122,11 @@ slots:
     values:
     - positive
     - negative
-
+  requested_slot:
+    type: rasa.shared.core.slots.UnfeaturizedSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: false
 responses:
   utter_help:
   - text: |-
@@ -273,7 +283,6 @@ actions:
 - action_update_sim
 - action_validate_sim_form
 - action_restart_with_button
-
 forms:
   sim_form:
     phone_num:

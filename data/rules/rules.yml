@@ -4,7 +4,7 @@ rules:
   steps:
   - intent: check_sim
   - action: sim_form
-  - activate: sim_form
+  - active_loop: sim_form
 
 - rule: Submit SIM forms
   condition:

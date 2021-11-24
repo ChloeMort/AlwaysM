@@ -14,7 +14,7 @@ stories:
   - intent: greet
   - intent: enter_data
     entities:
-    - name: 
+    - name: wangxishun
   - action: action_greet_user
 - story: neither options
   steps:
