@@ -14,20 +14,17 @@
 #
 #
 # class ActionHelloWorld(Action):
-#
+
 #     def name(self) -> Text:
 #         return "action_hello_world"
-#
+
 #     def run(self, dispatcher: CollectingDispatcher,
 #             tracker: Tracker,
 #             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-#
+
 #         dispatcher.utter_message(text="Hello World!")
-#
-#         return []
-import logging
-import json
-from datetime import datetime
+
+
 from typing import Any, Dict, List, Text, Optional
 import sqlalchemy as sa
 from rasa_sdk import Action, Tracker
@@ -35,6 +32,7 @@ from rasa_sdk.types import DomainDict
 from rasa_sdk.forms import FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.events import (
+    ConversationPaused,
     SlotSet,
     EventType,
     ActionExecuted,
@@ -43,25 +41,16 @@ from rasa_sdk.events import (
     FollowupAction,
     UserUtteranceReverted,
 )
-from actions.profile_db import User, create_database, ProfileDB
+from actions.profile_db import User, Shop, SIM, Plan, Grievance
+from sqlalchemy import create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column,Integer,String,ForeignKey
+from sqlalchemy.orm import sessionmaker
 
-logger = logging.getLogger(__name__)
-
-
-class ActionPause(Action):
-    """Pause the conversation."""
-
-    def name(self) -> Text:
-        return "action_pause"
-
-    def run(
-        self,
-        dispatcher: CollectingDispatcher,
-        tracker: Tracker,
-        domain: DomainDict,
-    ) -> List[EventType]:
-        return [ConversationPaused()]
-    
+engine=create_engine('sqlite:///am.db')
+Base=declarative_base()
+Session=sessionmaker(bind=engine)
+session=Session()
 
 class ActionGreetUser(Action):
     """Greets the user with/without privacy policy."""
@@ -87,8 +76,6 @@ class ActionGreetUser(Action):
                 return []
             else:
                 dispatcher.utter_message(response="utter_greet")
-                dispatcher.utter_message(response="utter_inform_privacy_policy")
-                return [SlotSet("shown_privacy", True)]
         return []
 
 class ActionRestartWithButton(Action):
@@ -105,23 +92,142 @@ class ActionRestartWithButton(Action):
         dispatcher.utter_message(template="utter_restart_with_button")
 
 
-user_obj = User(name="tester", mail="tester@test.com", id_num="123456")
 
 
-class ValidateUserForm(FormValidationAction):
+class ActionQueryUser(Action):
     def name(self) -> Text:
-        return "validate_user_form"
+        return "action_query_user"
 
-    def validate_email(
+    def run(
         self,
-        value: Text,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> None:
+
+        if session.query(User).filter(User.id_num == tracker.getslot('user_id')).first():
+            dispatcher.utter_message(response="utter_exist_user")
+        else:
+            dispatcher.utter_message(response="utter_no_user")
+
+class ActionQueryShop(Action):
+    def name(self) -> Text:
+        return "action_query_shop"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> None:
+
+        if session.query(Shop).filter(Shop.location == tracker.getslot('user_location')).all():
+            dispatcher.utter_message(response="utter_exist_shop")
+            for row in session.query(Shop).filter(Shop.location == tracker.getslot('user_location')).all():
+                text = row.name + "in" + row.location + "is available from " + row.open_time + " to " + row.close_time + '.'
+                dispatcher.utter_message(text=text)
+        else:
+            dispatcher.utter_message(response="utter_no_shop")
+
+class ActionQueryPlan(Action):
+    def name(self) -> Text:
+        return "action_query_plan"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> None:
+        if tracker.getslot('generation') == 'all' and tracker.getslot('pay_method') == 'both':
+            res = session.query(Plan).all()
+            for row in res:
+                text = row.name + "\t" + row.generation + "\t" + row.pay_method + "\t" + str(row.price) + '\n' + row.description
+                dispatcher.utter_message(text='The available plans are:\n' + text)
+        elif tracker.getslot('generation') == 'all':
+            res = session.query(Plan).filter(Plan.pay_method == tracker.getslot('pay_method')).all()
+            for row in res:
+                text = row.name + "\t" + row.generation + "\t" + row.pay_method + "\t" + str(row.price) + '\n' + row.description
+                dispatcher.utter_message(text='The available plans are:\n' + text)
+        elif session.query(Plan).filter(Plan.pay_method == tracker.getslot('pay_method') and Plan.generation == tracker.getslot('generation')).all():
+                dispatcher.utter_message(response="utter_no_plan")
+        else:
+            res = session.query(Plan).filter(Plan.pay_method == tracker.getslot('pay_method') and Plan.generation == tracker.getslot('generation')).all()
+            for row in res:
+                text = row.name + "\t" + row.generation + "\t" + row.pay_method + "\t" + str(row.price) + '\n' + row.description
+                dispatcher.utter_message(text=f"The available plans are:\n" + text)
+
+
+class ValidateSimForm(FormValidationAction):
+    def name(self) -> Text:
+        return "validate_sim_form"
+
+    def validate_phone_num(
+        self,
+        slot_value: Any,
         dispatcher: CollectingDispatcher,
         tracker: Tracker,
         domain: DomainDict,
     ) -> Dict[Text, Any]:
+        """Validate `phone_num` value."""
 
-        if MailChimpAPI.is_valid_email(value):
-            return {"email": value}
+        if len(slot_value) == 0:
+            dispatcher.utter_message(text=f"You need to enter a phone number")
+            return {"phone_num": None}
+        dispatcher.utter_message(text=f"Your phone number is {slot_value}.")
+        return {"phone_num": slot_value}
+
+    def validate_user_id(
+        self,
+        slot_value: Any,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Dict[Text, Any]:
+        """Validate `user_id` value."""
+
+        if len(slot_value) == 0:
+            dispatcher.utter_message(text=f"You need to enter an ID number")
+            return {"user_id": None}
+        dispatcher.utter_message(text=f"Your ID number is {slot_value}.")
+        return {"user_id": slot_value}
+    
+    
+class ActionQuerySim(Action):
+    def name(self) -> Text:
+        return "action_query_sim"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> None:
+
+        if session.query(SIM).filter(SIM.phone_num == tracker.getslot('phone_num') and SIM.user_id == tracker.getslot('user_id')).first():
+            for row in session.query(SIM).filter(SIM.phone_num == tracker.getslot('phone_num') and SIM.user_id == tracker.getslot('user_id')).first():
+                boo = row.status
+                if boo == 0:
+                    dispatcher.utter_message(text =f"Your SIM card is frozen now.")
+                else:
+                    dispatcher.utter_message(text =f"Your SIM card is now in use.")
         else:
-            dispatcher.utter_message(template="utter_no_email")
-            return {"email": None}
+            dispatcher.utter_message(text="There is something wrong with you phone number or ID.")
+            
+
+class ActionUpdateSim(Action):
+    def name(self) -> Text:
+        return "action_update_sim"
+
+    def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> None:
+
+        try:
+            session.query(SIM).filter(SIM.phone_num == tracker.getslot('phone_num') and SIM.user_id == tracker.getslot('user_id')).update({'status':0})
+            dispatcher.utter_message(text =f"Your SIM card is now frozen.")
+        except:
+            dispatcher.utter_message(text="There is something wrong with you phone number or ID.")

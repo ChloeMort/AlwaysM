@@ -14,7 +14,7 @@ stories:
   - intent: greet
   - intent: enter_data
     entities:
-    - name: akela
+    - name: 
   - action: action_greet_user
 - story: neither options
   steps:
@@ -61,11 +61,4 @@ stories:
   - intent: feedback
   - action: utter_thumbsup
   - action: utter_anything_else
-- story: say greet outside the flows
-  steps:
-  - intent: greet
-  - action: action_greet_user
-  - or:
-    - intent: greet
-    - intent: enter_data
-  - action: action_greet_user
+

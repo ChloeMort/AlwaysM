@@ -672,7 +672,7 @@ nlu:
     - plans
     - plan
     - available plans
-- intent: query_sim_state
+- intent: check_sime
   examples: |
     - tell me my sim status
     - is my sim due

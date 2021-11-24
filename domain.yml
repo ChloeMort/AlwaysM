@@ -61,48 +61,50 @@ entities:
 slots:
   generation:
     type: rasa.shared.core.slots.CategoricalSlot
-    initial_value: null
+    initial_value: all
     auto_fill: true
     influence_conversation: true
     values:
     - 3g
     - 4g
     - 5g
+    - all
   pay_method:
     type: rasa.shared.core.slots.CategoricalSlot
-    initial_value: null
+    initial_value: both
     auto_fill: true
     influence_conversation: true
     values:
     - prepaid
     - postpaid
-  shop_name:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: true
+    - both
   user_name:
     type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
     influence_conversation: true
+  shop_name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
   user_email:
-    type: rasa.shared.core.slots.AnySlot
+    type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
     influence_conversation: false
   user_id:
-    type: rasa.shared.core.slots.AnySlot
+    type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
     influence_conversation: false
   phone_num:
-    type: rasa.shared.core.slots.AnySlot
+    type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
     influence_conversation: false
   feedback_message:
-    type: rasa.shared.core.slots.AnySlot
+    type: rasa.shared.core.slots.TextSlot
     initial_value: null
     auto_fill: true
     influence_conversation: false
@@ -125,6 +127,14 @@ responses:
       - What should I do if my SIM card lost?
   utter_ask_problem_description:
   - text: Can you describe the problem you're having?
+  utter_exist_user:
+  - text: Your account exists.
+  utter_no_user:
+  - text: Your account does not exist.
+  utter_exist_shop:
+  - text: There are the shops around you.
+  utter_no_shop:
+  - text: Your account does not exist.
   utter_ask_help:
   - buttons:
     - payload: /affirm
@@ -246,19 +256,25 @@ responses:
   - text: There is a shop available in OU.
   utter_answer_plan:
   - text: 3G, 4G, 5G.
-  utter_response_sim_due:
-  - text: Your SIM card is due.
-  utter_sim_ no_due:
-  - text: Your SIM card is not due.
+  utter_sim_on:
+  - text: Your SIM card can use.
+  utter_sim_off:
+  - text: Your SIM card is frozen now.
+  utter_sim_slots:
+  - text: I will check the SIM with tele:{phone_num}, ID:{user_id}.
+  utter_out_of_scope:
+  - text: Sorry. This is out of my knowledge.
 actions:
 - action_greet_user
-- action_pause
-
+- action_query_user
+- action_query_plan
+- action_query_shop
+- action_query_sim
+- action_update_sim
+- action_validate_sim_form
 - action_restart_with_button
+
 forms:
-  suggestion_form:
-    suggestion:
-    - type: from_text
   sim_form:
     phone_num:
     - entity: phone_num
@@ -270,7 +286,7 @@ forms:
       type: from_entity
     - intent: enter_data
       type: from_text
-  connect_plan_form:
+  plan_form:
     generation:
     - entity: generation
       type: from_entity
