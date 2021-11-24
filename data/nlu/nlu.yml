@@ -515,7 +515,7 @@ nlu:
     - hello sweet boy
     - hello there
     - hello world
-    - hello, my name is [Charles Pfeffer](name)
+    - hello, my name is [Charles Pfeffer](user_name)
     - hello?
     - hello]
     - hellooo
@@ -545,8 +545,8 @@ nlu:
     - hi friend
     - hi friends
     - hi hi
-    - hi i'm [Sandra Hernandez](name)
-    - hi im [Amanda Anderson](name)
+    - hi i'm [Sandra Hernandez](user_name)
+    - hi im [Amanda Anderson](user_name)
     - hi pal!
     - hi there
     - hi there it's me
@@ -560,7 +560,7 @@ nlu:
     - hlo
     - hola
     - howdy
-    - i am [Karen Mease](name)
+    - i am [Karen Mease](user_name)
     - jojojo
     - jop
     - konichiwa

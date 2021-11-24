@@ -215,7 +215,6 @@ nlu:
 - intent: human_handoff
   examples: |
     - Can I speak to anyone who can really help me?
-    - Could I talk to [Asgod King](user_name)?
     - I don't wanna talk to a bot
     - I dont like to talk to a machine
     - I want to talk to a human
@@ -229,7 +228,6 @@ nlu:
     - give me a human now
     - human handoff
     - i dont wanna talk to a bot
-    - i want to speak to a [manager](job_function)
     - i want to speak to a real person
     - i want to speak to customer service
     - i want to talk to a human
@@ -318,9 +316,6 @@ nlu:
 - synonym: money
   examples: |
     - amounts
-- synonym: name
-  examples: |
-    - names
 - synonym: organisation
   examples: |
     - companies

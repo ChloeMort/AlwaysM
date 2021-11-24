@@ -50,8 +50,6 @@ intents:
 entities:
 - generation
 - pay_method
-- shop_city
-- shop_address
 - shop_name
 - shop_available_time
 - user_name
@@ -59,11 +57,7 @@ entities:
 - user_email
 - phone_num
 - user_id
-- plan
-- name
-- job_function
-- language
-- company
+
 slots:
   generation:
     type: rasa.shared.core.slots.CategoricalSlot
@@ -87,17 +81,22 @@ slots:
     initial_value: null
     auto_fill: true
     influence_conversation: true
-  shop_city:
+  user_name:
+    type: rasa.shared.core.slots.TextSlot
+    initial_value: null
+    auto_fill: true
+    influence_conversation: true
+  user_email:
     type: rasa.shared.core.slots.AnySlot
     initial_value: null
     auto_fill: true
     influence_conversation: false
-  shop_address:
+  user_id:
     type: rasa.shared.core.slots.AnySlot
     initial_value: null
     auto_fill: true
     influence_conversation: false
-  email:
+  phone_num:
     type: rasa.shared.core.slots.AnySlot
     initial_value: null
     auto_fill: true
@@ -115,21 +114,7 @@ slots:
     values:
     - positive
     - negative
-  problem_description:
-    type: rasa.shared.core.slots.TextSlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
-  faq:
-    type: rasa.shared.core.slots.AnySlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
-  shown_privacy:
-    type: rasa.shared.core.slots.AnySlot
-    initial_value: null
-    auto_fill: true
-    influence_conversation: false
+
 responses:
   utter_help:
   - text: |-

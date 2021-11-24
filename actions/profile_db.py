@@ -15,20 +15,6 @@ from sqlalchemy.sql.sqltypes import TEXT, Boolean, Float
 
 utc = pytz.UTC
 
-GENERAL_ACCOUNTS = {
-    "recipient": [
-        "katy parrow",
-        "evan oslo",
-        "william baker",
-        "karen lancaster",
-        "kyle gardner",
-        "john jacob",
-        "percy donald",
-        "lisa macintyre",
-    ],
-    "vendor": ["target", "starbucks", "amazon"],
-    "depositor": ["interest", "employer"],
-}
 
 ACCOUNT_NUMBER_LENGTH = 12
 CREDIT_CARD_NUMBER_LENGTH = 14
@@ -115,9 +101,24 @@ class ProfileDB:
         Grievance.__table__.create(self.engine, checkfirst=True)
 
     def get_user(self, id: int):
-        """Get an `User` object based on an `User.id`"""
+        """Get a `User` object based on an `User.id`"""
         return self.session.query(User).filter(User.id == id).first()
 
+    def get_all_plan(self):
+        """Get all the 'Plan' objects"""
+        return self.session.query(Plan).order_by(Plan.id).all()
+    
+    def query_plan(self, generation: String, pay_method: String):
+        """Query the specific 'Plan' objects by generation, pay method"""
+        return self.session.query(Plan).filter(Plan.generation == generation, Plan.pay_method == pay_method).all()
+
+    def query_shop(self, location: String):
+        """Query the specific 'Shop' objects by location"""
+        return self.session.query(Shop).filter(Shop.location.like('%'+location+'%')).all()
+
+    def query_sim_state(self, )
+
+        return self.session.query()
 
     @staticmethod
     def get_account_number(account: Union[CreditCard, Account]):
