@@ -3,6 +3,7 @@ rules:
 - rule: Activate SIM forms
   steps:
   - intent: check_sim
+  - action: utter_ask_sim
   - action: sim_form
   - active_loop: sim_form
 
@@ -14,25 +15,53 @@ rules:
   - active_loop: null
   - slot_was_set:
     - requested_slot: null
-  - action: utter_sim_slots
+  - action: action_query_sim
 
 
+- rule: Activate shop forms
+  steps:
+  - intent: query_shop
+  - action: shop_form
+  - active_loop: shop_form
+
+- rule: Submit shop forms
+  condition:
+  - active_loop: shop_form
+  steps:
+  - action: shop_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_query_shop
+
+- rule: Activate user forms
+  steps:
+  - intent: query_user
+  - action: user_form
+  - active_loop: user_form
+
+- rule: Submit user forms
+  condition:
+  - active_loop: user_form
+  steps:
+  - action: user_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_query_user
 
 - rule: answer out of scope
   steps:
   - intent: out_of_scope
   - action: utter_out_of_scope
-    
-- rule: greet
-  steps:
-  - intent: greet
-  - action: utter_greet
-  - action: utter_help
+  - action: utter_possibilities
+  - action: utter_anything_else
+
 
 - rule: say goodbye
   steps:
-  - intent: goodbye
-  - action: utter_goodbye
+  - intent: bye
+  - action: utter_bye
 
 - rule: help
   steps:
@@ -43,23 +72,12 @@ rules:
   steps:
   - intent: thank
   - action: utter_noworries
+  - action: utter_anything_else
 
 - rule: restart
   steps:
   - intent: restart
-  - action: action_restart_with_button
+  - action: action_restart
 
-- rule: 1uery \pPlan
-  steps:
-  - intent: query_plan
-  - action: action_query_plan
 
-- rule: query user
-  steps:
-  - intent: query_user
-  - action: action_query_user
 
-- rule: query shop
-  steps:
-  - intent: query_shop
-  - action: action_query_shop

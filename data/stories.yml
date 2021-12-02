@@ -1,6 +1,6 @@
 version: "2.0"
 stories:
-- story: thanks
+- story: thankyou
   steps:
   - intent: thank
   - action: utter_noworries
@@ -12,16 +12,7 @@ stories:
 - story: greet
   steps:
   - intent: greet
-  - intent: enter_data
-    entities:
-    - name: wangxishun
-  - action: action_greet_user
-- story: neither options
-  steps:
-  - intent: greet
-  - action: action_greet_user
-  - intent: deny
-  - action: utter_nohelp
+  - action: utter_greet_noname
 - story: anything else? - no
   steps:
   - action: utter_anything_else
@@ -41,24 +32,5 @@ stories:
   steps:
   - intent: react_negative
   - action: utter_react_negative
-- story: query shop
-  steps:
-  - intent: greet
-  - action: action_greet_user
-  - intent: query_shop
-  - action: utter_shop
-  - action: utter_ask_feedback
-  - intent: feedback
-  - action: utter_thumbsup
-  - action: utter_anything_else
-- story: query plan
-  steps:
-  - intent: greet
-  - action: action_greet_user
-  - intent: query_plan
-  - action: utter_plan
-  - action: utter_ask_feedback
-  - intent: feedback
-  - action: utter_thumbsup
-  - action: utter_anything_else
+
 

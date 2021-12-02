@@ -1,0 +1,44 @@
+2021-11-27 10:37:42 INFO     root  - Starting Rasa server on http://localhost:5005
+2021-11-27 10:37:42 INFO     rasa.model  - Loading model models/20211127-020027.tar.gz...
+2021-11-27 10:37:51.503484: E tensorflow/stream_executor/cuda/cuda_driver.cc:271] failed call to cuInit: UNKNOWN ERROR (100)
+/mnt/d/Course/SpecialCourse/rasa/lib/python3.8/site-packages/tensorflow/python/framework/indexed_slices.py:447: UserWarning: Converting sparse IndexedSlices(IndexedSlices(indices=Tensor("gradients/cond_grad/gradients/cond/GatherV2_grad/Reshape_1:0", shape=(None,), dtype=int32), values=Tensor("gradients/cond_grad/gradients/cond/GatherV2_grad/Reshape:0", shape=(None,), dtype=float32), dense_shape=Tensor("gradients/cond_grad/gradients/cond/GatherV2_grad/Cast:0", shape=(1,), dtype=int32))) to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  warnings.warn(
+[93m/mnt/d/Course/SpecialCourse/rasa/lib/python3.8/site-packages/rasa/utils/train_utils.py:641: UserWarning: constrain_similarities is set to `False`. It is recommended to set it to `True` when using cross-entropy loss. It will be set to `True` by default, Rasa Open Source 3.0.0 onwards.
+  rasa.shared.utils.io.raise_warning(
+[0m/mnt/d/Course/SpecialCourse/rasa/lib/python3.8/site-packages/tensorflow/python/framework/indexed_slices.py:447: UserWarning: Converting sparse IndexedSlices(IndexedSlices(indices=Tensor("gradients/cond_grad/Identity_1:0", shape=(None,), dtype=int64), values=Tensor("gradients/cond_grad/Identity:0", shape=(None,), dtype=float32), dense_shape=Tensor("gradients/cond_grad/Identity_2:0", shape=(1,), dtype=int32))) to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  warnings.warn(
+/mnt/d/Course/SpecialCourse/rasa/lib/python3.8/site-packages/tensorflow/python/framework/indexed_slices.py:447: UserWarning: Converting sparse IndexedSlices(IndexedSlices(indices=Tensor("gradients/cond_1_grad/Identity_1:0", shape=(None,), dtype=int64), values=Tensor("gradients/cond_1_grad/Identity:0", shape=(None,), dtype=float32), dense_shape=Tensor("gradients/cond_1_grad/Identity_2:0", shape=(1,), dtype=int32))) to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  warnings.warn(
+/mnt/d/Course/SpecialCourse/rasa/lib/python3.8/site-packages/tensorflow/python/framework/indexed_slices.py:447: UserWarning: Converting sparse IndexedSlices(IndexedSlices(indices=Tensor("gradients/cond_2_grad/Identity_1:0", shape=(None,), dtype=int64), values=Tensor("gradients/cond_2_grad/Identity:0", shape=(None,), dtype=float32), dense_shape=Tensor("gradients/cond_2_grad/Identity_2:0", shape=(1,), dtype=int32))) to a dense Tensor of unknown shape. This may consume a large amount of memory.
+  warnings.warn(
+2021-11-27 10:38:26 INFO     root  - Rasa server is up and running.
+2021-11-27 11:23:28 INFO     rasa_sdk.endpoint  - Starting action endpoint server...
+2021-11-27 11:23:29 INFO     rasa_sdk.executor  - Registered function for 'action_greet_user'.
+2021-11-27 11:23:29 INFO     rasa_sdk.executor  - Registered function for 'action_ask_user_id'.
+2021-11-27 11:23:29 INFO     rasa_sdk.executor  - Registered function for 'action_query_user'.
+2021-11-27 11:23:29 INFO     rasa_sdk.executor  - Registered function for 'action_query_shop'.
+2021-11-27 11:23:29 INFO     rasa_sdk.executor  - Registered function for 'action_query_plan'.
+2021-11-27 11:23:29 INFO     rasa_sdk.executor  - Registered function for 'action_query_sim'.
+2021-11-27 11:23:29 INFO     rasa_sdk.executor  - Registered function for 'action_update_sim'.
+2021-11-27 11:23:29 INFO     rasa_sdk.executor  - Registered function for 'action_validate_user_form'.
+2021-11-27 11:23:29 INFO     rasa_sdk.executor  - Registered function for 'action_validate_shop_form'.
+2021-11-27 11:23:29 INFO     rasa_sdk.executor  - Registered function for 'action_validate_sim_form'.
+2021-11-27 11:23:29 INFO     rasa_sdk.endpoint  - Action endpoint is up and running on http://0.0.0.0:5055
+Traceback (most recent call last):
+  File "/usr/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/usr/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/usr/lib/python3.8/http/server.py", line 1294, in <module>
+    test(
+  File "/usr/lib/python3.8/http/server.py", line 1249, in test
+    with ServerClass(addr, HandlerClass) as httpd:
+  File "/usr/lib/python3.8/socketserver.py", line 452, in __init__
+    self.server_bind()
+  File "/usr/lib/python3.8/http/server.py", line 1292, in server_bind
+    return super().server_bind()
+  File "/usr/lib/python3.8/http/server.py", line 138, in server_bind
+    socketserver.TCPServer.server_bind(self)
+  File "/usr/lib/python3.8/socketserver.py", line 466, in server_bind
+    self.socket.bind(self.server_address)
+OSError: [Errno 98] Address already in use

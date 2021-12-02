@@ -653,8 +653,6 @@ nlu:
     - come back
     - cool! can I do something else here?
     - hello what can you do for me
-    - help
-    - help me
     - help please
     - help pls
     - help?
@@ -672,7 +670,7 @@ nlu:
     - plans
     - plan
     - available plans
-- intent: check_sime
+- intent: check_sim
   examples: |
     - tell me my sim status
     - is my sim due
@@ -687,3 +685,8 @@ nlu:
     - I am stuck and I need help
     - something wrong with my SIM
     - I cant make a call
+- intent: query_user
+  examples: |
+    - Check my account
+    - I want to know if my account exist.
+    - account

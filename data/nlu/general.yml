@@ -26,6 +26,10 @@ nlu:
     - location = [Jiangning](user_location)
     - $1
     - 1 euro
+    - my id is [123123123](user_id)
+    - my phone num is [123123123](phone_num)
+    - Show me the [4G](generation) [prepaid](pay_method) plans
+    - my name is [LiWJ](user_name)
     - 10000 dollars
     - 10000000
     - 100000k
@@ -292,6 +296,7 @@ nlu:
     - hey, i said restart
     - restart session pls
     - restart ps
+    - restart
 - intent: out_of_scope
   examples: |
     - what is the square root of 5
@@ -684,78 +689,6 @@ nlu:
     - sudo reboot
     - asdfgasd
     - asdfgasdas
-
-
-- synonym: USA
-  examples: |
-    - US
-    - United States
-    - U.S.
-    - usa
-- synonym: United Kingdom
-  examples: |
-    - UK
-    - U.K.
-- synonym: all
-  examples: |
-    - both
-- synonym: date
-  examples: |
-    - dates
-- synonym: distance
-  examples: |
-    - distances
-- synonym: money
-  examples: |
-    - amounts
-- synonym: organisation
-  examples: |
-    - companies
-- synonym: prepaid
-  examples: |
-    - pay before use
-    - pay in advance
-    - pay ahead
-- synonym: postpaid
-  examples: |
-    - pay after use
-    - pay after
-- synonym: 5G
-  examples: |
-    - 5g
-    - 5th-generation
-    - fifth generation
-    - the fifth generation
-    - the 5rd generation
-    - 5g network
-    - 5th-generation network
-    - fifth generation network
-    - the fifth generation network
-    - the 5rd generation network
-- synonym: 4G
-  examples: |
-    - 4g
-    - 4th-generation
-    - fourth generation
-    - the fourth generation
-    - the 4rd generation
-    - 4g network
-    - 4th-generation network
-    - fourth generation network
-    - the fourth generation network
-    - the 4rd generation network
-- synonym: 3G
-  examples: |
-    - 3g
-    - 3rd-generation
-    - Third generation
-    - the third generation
-    - the 3rd generation
-    - 3g network
-    - 3rd-generation network
-    - Third generation network
-    - the third generation network
-    - the 3rd generation network
 - regex: greet
   examples: |
     - hey[^\s]*

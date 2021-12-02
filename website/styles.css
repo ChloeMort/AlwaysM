@@ -69,13 +69,19 @@ body {
 }
 
 
+.f1 {
+	align-items: center;
+	position:absolute;
+	bottom:0px;
+}
 
 footer p {
     font-size: 0.75em;
+	display: flex;
     text-align: center;
+	align-items: center;
     color: #fff;
     padding: 0 1em;
-	bottom: 0;
 }
 
 footer p a {
